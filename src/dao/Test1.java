@@ -9,6 +9,6 @@ package dao;
  *
  * @author dongh
  */
-public class longlon {
+public class Test1 {
     
 }
