@@ -11,10 +11,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,6 +75,24 @@ public class DBUtility {
             JOptionPane.showMessageDialog(null, ex);
         }
         return conn;
+    }
+    public static void closeAll(Connection cnn, Statement stmt, PreparedStatement psmt, CallableStatement csmt) {
+        try {
+            if (cnn != null) {
+                cnn.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (psmt != null) {
+                psmt.close();
+            }
+            if (csmt != null) {
+                csmt.close();
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DBUtility.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
     public static void main(String[] args) {
        System.out.println(ConnectDatabase());
